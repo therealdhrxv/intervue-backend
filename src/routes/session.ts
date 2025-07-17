@@ -35,13 +35,17 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.get('/teacher', (req, res) => {
+router.post('/teacher', (req, res) => {
+  const { name } = req.body;
+  if (!name || typeof name !== 'string' || !name.trim()) {
+    return res.status(400).json({ error: 'Name is required' });
+  }
   const id = generateId();
   const sessionId = generateId();
   const now = new Date();
   const teacher: User = {
     id,
-    name: 'Teacher',
+    name,
     role: 'teacher',
     socketId: '',
     sessionId,
