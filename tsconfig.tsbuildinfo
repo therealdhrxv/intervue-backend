@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/routes/polls.ts","./src/routes/responses.ts","./src/routes/session.ts","./src/routes/students.ts","./src/socket/index.ts","./src/store/memory.ts","./src/utils/id.ts"],"version":"5.7.2"}
