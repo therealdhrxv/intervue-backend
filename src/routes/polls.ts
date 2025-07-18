@@ -35,10 +35,10 @@ router.post('/', (req, res) => {
     console.warn('❌ Missing createdBy');
     return res.status(400).json({ error: 'createdBy is required' });
   }
-  if ((status === 'active' || !status) && polls.some(p => p.status === 'active')) {
-    console.warn('❌ Active poll already exists');
-    return res.status(409).json({ error: 'Another poll is already active' });
-  }
+//   if ((status === 'active' || !status) && polls.some(p => p.status === 'active')) {
+//     console.warn('❌ Active poll already exists');
+//     return res.status(409).json({ error: 'Another poll is already active' });
+//   }
   if (typeof correctOptionIndex !== 'number' || correctOptionIndex < 0 || correctOptionIndex >= options.length) {
     return res.status(400).json({ error: 'A valid correctOptionIndex is required' });
   }
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
     options: pollOptions,
     createdBy,
     timeLimit,
-    status: status || 'draft',
+    status: status || 'active',
     createdAt: now,
     correctOptionIndex,
   };
