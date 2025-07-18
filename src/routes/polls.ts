@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log('📥 POST /api/polls — received:', req.body);
 
-  const { question, options, createdBy, timeLimit, status } = req.body;
+  const { question, options, createdBy, timeLimit, status, correctOptionIndex } = req.body;
 
   // Validation
   if (!question || typeof question !== 'string' || !question.trim()) {
@@ -39,11 +39,18 @@ router.post('/', (req, res) => {
     console.warn('❌ Active poll already exists');
     return res.status(409).json({ error: 'Another poll is already active' });
   }
+  if (typeof correctOptionIndex !== 'number' || correctOptionIndex < 0 || correctOptionIndex >= options.length) {
+    return res.status(400).json({ error: 'A valid correctOptionIndex is required' });
+  }
 
   // Construct Poll
   const pollId = generateId();
   const now = new Date();
-  const pollOptions: PollOption[] = options.map((opt: string) => ({ id: generateId(), text: opt }));
+  const pollOptions: PollOption[] = options.map((opt: string, idx: number) => ({
+    id: generateId(),
+    text: opt,
+    isCorrect: idx === correctOptionIndex
+  }));
   const poll: Poll = {
     id: pollId,
     question,
@@ -52,6 +59,7 @@ router.post('/', (req, res) => {
     timeLimit,
     status: status || 'draft',
     createdAt: now,
+    correctOptionIndex,
   };
   polls.push(poll);
 

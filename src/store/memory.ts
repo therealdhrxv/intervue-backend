@@ -12,6 +12,7 @@ export type User = {
 export type PollOption = {
   id: string;
   text: string;
+  isCorrect?: boolean;
 };
 
 export type Poll = {
@@ -24,6 +25,7 @@ export type Poll = {
   createdAt: Date;
   activatedAt?: Date;
   completedAt?: Date;
+  correctOptionIndex?: number;
 };
 
 export type Response = {
