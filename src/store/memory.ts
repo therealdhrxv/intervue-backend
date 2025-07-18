@@ -36,6 +36,15 @@ export type Response = {
   submittedAt: Date;
 };
 
+export type ChatMessage = {
+  id: string;
+  userId: string;
+  userName: string;
+  message: string;
+  timestamp: string;
+};
+
 export const users: User[] = [];
 export const polls: Poll[] = [];
 export const responses: Response[] = [];
+export const messages: ChatMessage[] = [];

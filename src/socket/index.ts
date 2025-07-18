@@ -14,6 +14,10 @@ export function setupSocket(server: HTTPServer) {
   io.on('connection', (socket) => {
     console.log('Socket connected:', socket.id);
 
+    socket.on('chat-message', (message) => {
+        socket.broadcast.emit('chat-message', message);
+    })
+
     socket.on('disconnect', () => {
       console.log('Socket disconnected:', socket.id);
     });

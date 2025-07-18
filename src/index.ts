@@ -5,6 +5,7 @@ import sessionRouter from "./routes/session";
 import pollsRouter from "./routes/polls";
 import responsesRouter from "./routes/responses";
 import studentsRouter from "./routes/students";
+import chatRouter from "./routes/chat";
 import { createServer } from "http";
 import { setupSocket } from "./socket";
 
@@ -22,6 +23,7 @@ app.use("/api/session", sessionRouter);
 app.use("/api/polls", pollsRouter);
 app.use("/api/polls", responsesRouter); // responses are nested under /api/polls/:id/responses
 app.use("/api/students", studentsRouter);
+app.use("/api/chat", chatRouter);
 
 const PORT = process.env.PORT || 4000;
 const httpServer = createServer(app);
