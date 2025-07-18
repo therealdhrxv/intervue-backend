@@ -14,11 +14,11 @@ router.post('/register', (req, res) => {
     return res.status(400).json({ error: 'Name is required' });
   }
 
-  const existing = users.find(u => u.name === name && u.role === 'student');
-  if (existing) {
-    console.warn('⚠️ Name already taken:', name);
-    return res.status(409).json({ error: 'Name already taken' });
-  }
+//   const existing = users.find(u => u.name === name && u.role === 'student');
+//   if (existing) {
+//     console.warn('⚠️ Name already taken:', name);
+//     return res.status(409).json({ error: 'Name already taken' });
+//   }
 
   const id = generateId();
   const sessionId = generateId();
