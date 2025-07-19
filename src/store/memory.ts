@@ -21,7 +21,7 @@ export type Poll = {
   options: PollOption[];
   createdBy: string;
   timeLimit: number;
-  status: 'draft' | 'active' | 'completed';
+  status: 'active' | 'completed';
   createdAt: Date;
   activatedAt?: Date;
   completedAt?: Date;
