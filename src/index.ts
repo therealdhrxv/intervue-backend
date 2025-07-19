@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/health_check", (req, res) => {
+app.use("/api/health", (req, res) => {
   res.json({ message: "OK" });
 });
 app.use("/api/session", sessionRouter);
@@ -25,10 +25,11 @@ app.use("/api/polls", responsesRouter); // responses are nested under /api/polls
 app.use("/api/students", studentsRouter);
 app.use("/api/chat", chatRouter);
 
-const PORT = process.env.PORT || 4000;
+const PORT = parseInt(process.env.PORT || "4000", 10);
+const HOST = process.env.HOST || '0.0.0.0';
 const httpServer = createServer(app);
 setupSocket(httpServer);
 
-httpServer.listen(PORT, () => {
-  console.log(`Backend is running on port ${PORT}`);
+httpServer.listen(PORT, HOST, () => {
+  console.log(`✅ Backend is running at http://${HOST}:${PORT}`);
 });
